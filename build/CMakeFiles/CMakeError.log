@@ -1,0 +1,40 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/nick/Downloads/embedded-coding-challenge-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/bin/gmake cmTC_67149/fast && /bin/gmake -f CMakeFiles/cmTC_67149.dir/build.make CMakeFiles/cmTC_67149.dir/build
+gmake[1]: Entering directory '/home/nick/Downloads/embedded-coding-challenge-master/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_67149.dir/src.c.o
+/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -std=gnu99 -o CMakeFiles/cmTC_67149.dir/src.c.o   -c /home/nick/Downloads/embedded-coding-challenge-master/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_67149
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_67149.dir/link.txt --verbose=1
+/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_67149.dir/src.c.o  -o cmTC_67149 
+/bin/ld: CMakeFiles/cmTC_67149.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_67149.dir/build.make:87: cmTC_67149] Error 1
+gmake[1]: Leaving directory '/home/nick/Downloads/embedded-coding-challenge-master/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:121: cmTC_67149/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
