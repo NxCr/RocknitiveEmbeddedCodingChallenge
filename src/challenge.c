@@ -187,6 +187,7 @@ void challenge_run() {
                 timeout_msg->len = 1;
                 timeout_msg->value[0] = timeouts[i].payload;
                 timeouts[i].delay_over = 0;
+                console_print("sent ");
                 print_message(timeout_msg);
                 send(timeout_buf, 2);
             }
