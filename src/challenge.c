@@ -143,6 +143,8 @@ void challenge_run() {
                 switch(msg->type){
                     case cc_message_type_EMPTY:{
                         send(task_buffer, msg->len+1);
+                        console_print("sent ");
+                        print_message(msg);
                     } break;
                     case cc_message_type_ADD:{
                         uint16_t a, b;
